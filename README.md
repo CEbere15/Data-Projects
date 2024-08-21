@@ -7,6 +7,7 @@
   - [Data Dictionary](#Data-Dictionary)
 - [Tools](#Tools)
 - [Data Cleaning and Manipulation](#data-cleaning-and-manipulation)
+- [Exploratory Data Analysis](#exploratory-data-analysis)
 - [Insights](#insights)
 - [Contributing](#contributing)
 - [License](#license)
