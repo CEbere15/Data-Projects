@@ -25,14 +25,14 @@ The dataset came from a Kaggle dataset that can be found [here](https://www.kagg
 
 #### Data Dictionary
 
-| Column       | Data Type   | Description                                                                 |
+| Column       | Data Type       | Description                                                                      |
 |-------------------|-------------|-----------------------------------------------------------------------------|
 | `Unnamed: 0`      | Integer     | Index of the values.                        |
 | `county`          | Text        | The Michigan county where the water usage was measured.                     |
-| `year`            | Integer     | The year in which the water usage data was recorded.                        |
 | `gallons_from_great_lakes`      | Integer     | The volume of water from the Great Lakes used, by gallons.    |
-| `gallons_from_groundwater`      | Integer     | The volume of water from the ground sources used, by gallons.    |
-| `gallons_from_inland_surface`      | Integer     | The volume of water from the inland sources used, by gallons.    |
+| `gallons_from_groundwater`      | Integer     | The volume of water from the ground sources used, by gallons. |
+| `gallons_from_inland_surface`   | Integer     | The volume of water from the inland sources used, by gallons. |
+| `total_gallons`            | Integer     | The combined volume of water from all sources by gallons.          |
 | `industry`        | Text        | The industry that consumed the water (e.g., Agriculture, Manufacturing).    |
 | `year`            | Integer     | The year in which the water usage data was recorded.                        |
 
@@ -112,13 +112,27 @@ data.describe()
 ![Screenshot 2024-08-14 at 02-49-53 Vendors - Jupyter Notebook](https://github.com/user-attachments/assets/0a3900f0-f375-4db9-a190-5d4e6cacca5c)
 
 
+From the summary statistics of all the numeric variables, something very noticeable is that for Inland and Great Lake, 75% of values come up as 0. And with Groundwater 25%. This likely means that between counties, most industries use Groundwater at a more common rate than they use water from the Great Lake or Inland sources. Despite that however, Great Lake has the highest maximum volume by at least 4 times any other source. Which could mean that Great Lake consumption, is the highest in total of all sources.
+
+
+
+
 3. What are the summary statistics for the categorical values?
 ```py
 # Gather the categorical values and find the summary statistics of them
 categorical = data.dtypes[data.dtypes=="object"].index
 data[categorical].describe()
 ```
+
+
+
+
+
 ![Screenshot 2024-08-14 at 02-54-33 Vendors - Jupyter Notebook](https://github.com/user-attachments/assets/8da1fd1b-2ec3-49d0-9684-50602f1f514f)
+
+
+
+From the categorical summary statistics are 85 different counties in the county variable for Michigan. We can also see that there are 7 different industries throughout. The state variable of course, only has Michigan in it, as we are only looking at the singular state and its water use for this analysis.
 
 
 4. 
