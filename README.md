@@ -116,7 +116,7 @@ Create Table MIWater as Select
 	AllSources as AllConsumption,
 	dense_rank() over(PARTITION by year, county order by Allsources desc) as 'Industry Rank'
 from MichiganWater
-where Industry != 'Total All Sectors' and County not in ('St Clair',St Joseph');
+where Industry != 'Total All Sectors' and County not in ('St Clair','St Joseph');
 ```
 
 ## Exploratory Data Analysis
