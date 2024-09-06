@@ -64,7 +64,40 @@ Alter table MichiganWater rename column 'gallons_from_groundwater' to Groundwate
 Alter table MichiganWater rename column 'gallons_from_inland_surface' to InlandGallons;
 Alter table MichiganWater rename column 'total_gallons_all_sources' to AllSources;
 ```
+### County Check
+```sql
+-- Find the amount of counties in the data
+Select Count(distinct County) from MIWater
 
+```
+
+![image](https://github.com/user-attachments/assets/a2c0dcd0-0ea8-4d70-ae31-ef73af26d168)
+
+</br> 
+
+
+According to this, there are 85 different counties listed. However, Michigan only has 83 couonties in its borders. Meaning that there are two more than there are supposed to be.
+
+
+</br> 
+
+Now let us look through them all to see if there are repeats, spelled differently. to see if we can find any repeats.
+```sql
+Select distinct County from MIWater order by County
+
+```
+
+
+
+
+![image](https://github.com/user-attachments/assets/f95fc96a-7add-41b8-98e5-3cd1de1641ec)
+
+
+</br> 
+
+
+
+Now we can see that there seems to be two different St./Saint Clair and Josephs. Therefore we can get rid of the repeats and have the 83 counties needed. 
 ### Querying Useful Data
 
 The rows with industry as 'Total All Sectors' will not be needed for the analysis, due to the seperate ones being useful to making insights and they prove to be redundant due to having the option to sum the values. Therefore we will make a new table that does not have this listed as the industry, while at the same time ranking the industries by how much water they use in each county, by year.
@@ -83,7 +116,7 @@ Create Table MIWater as Select
 	AllSources as AllConsumption,
 	dense_rank() over(PARTITION by year, county order by Allsources desc) as 'Industry Rank'
 from MichiganWater
-where Industry != 'Total All Sectors';
+where Industry != 'Total All Sectors' and County not in ('St Clair',St Joseph');
 ```
 
 ## Exploratory Data Analysis
