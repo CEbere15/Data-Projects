@@ -175,5 +175,44 @@ From the categorical summary statistics are 85 different counties in the county 
 
 
 ### SQL
+## Data Analysis
 
 
+### Forecasting Future Years
+Using the sum of gallons used from previous years, we can create a forecast on the consumption for the next five, using ARIMA.
+```py
+from statsmodels.tsa.arima.model import ARIMA
+
+# Aggregate total water consumption by year
+yearly_consumption = data.groupby('year').sum()['AllConsumption']
+
+# Fit the ARIMA model
+model = ARIMA(yearly_consumption, order=(1, 1, 1)) 
+model_fit = model.fit()
+
+# Forecast for the next 5 years
+five_year_forecast = model_fit.forecast(steps=5)
+forecast_years = [yearly_consumption.index[-1] + i for i in range(1, 6)]
+
+
+# Plot the forecast
+plt.subplots(figsize=(45,30))
+plt.plot(yearly_consumption.index, yearly_consumption.values, label='Historical Consumption')
+plt.plot(forecast_years, five_year_forecast, label='Forecast', marker='o', color='maroon')
+plt.title('Forecasting Future Water Consumption')
+plt.legend()
+plt.show()
+```
+
+
+
+
+
+
+![image](https://github.com/user-attachments/assets/f21bdcfc-dadb-4114-8119-bd262b159488)
+
+
+</br> 
+
+
+As we can see, consumption is forecasted to continue to fall for the next five years. Which matches with the historical trend.
