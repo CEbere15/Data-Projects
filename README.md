@@ -120,7 +120,6 @@ where Industry != 'Total All Sectors' and County not in ('St Clair','St Joseph')
 ```
 
 ## Exploratory Data Analysis
-### Python
 
 1. Importing the software libraries needed for analyzing the data, along with the dataset itself.
 
@@ -174,7 +173,6 @@ From the categorical summary statistics are 85 different counties in the county 
 
 
 
-### SQL
 ## Data Analysis
 
 
